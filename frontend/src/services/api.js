@@ -2,6 +2,20 @@
 // Base URL for FastAPI backend (configurable)
 const API_BASE_URL = 'http://localhost:8000/api'
 
+
+
+// Check Backend Is Working FIne or not 
+export async function checkBackend(){
+  const response = await fetch(
+    `${API_BASE_URL}/health `
+  );
+  if(!response.ok){
+    throw new Error("Could Not Connect to the Backend");
+  }
+  return response.json();
+
+}
+
 /**
  * Predict mental health risk for a specific assessment type.
  * Sends questionnaire inputs to FastAPI endpoint or returns local mock calculation.
