@@ -1,5 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine,text
+from sqlalchemy.exc import SQLAlchemyError
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DatabaseURL is missing , check your backend/.env file") 
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True
+)
+
 
 app = FastAPI(
     title = "Get Your Mental Chech in Just Few Minutes ",
@@ -33,3 +49,21 @@ def health_check():
     return {
         "Status":"Healthy"
     }
+
+
+@app.get("api/health/database")
+def database_health_check():
+    try:
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+
+        return {
+            "Status":"Health",
+            "Database":"Connected"
+        }
+    except SQLAlchemyError:
+        return{
+            "Status" : "Error",
+            "Database":"Disconnected"
+        }
+    
