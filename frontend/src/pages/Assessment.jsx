@@ -4,6 +4,7 @@ import { predictAssessment } from '../services/api'
 
 const assessmentConfigs = {
   overall: {
+    assessment_id: '101',
     title: 'Overall Mental Health Assessment',
     shortTitle: 'Overall Mental Health',
     description:
@@ -19,6 +20,7 @@ const assessmentConfigs = {
   },
 
   depression: {
+    "assessment_id": "201",
     title: 'Depression Risk Assessment',
     shortTitle: 'Depression',
     description:
@@ -34,6 +36,7 @@ const assessmentConfigs = {
   },
 
   anxiety: {
+    "assessment_id": "301",
     title: 'Anxiety Risk Assessment',
     shortTitle: 'Anxiety',
     description:
@@ -49,6 +52,7 @@ const assessmentConfigs = {
   },
 
   stress: {
+    "assessment_id": "401",
     title: 'Perceived Stress Assessment',
     shortTitle: 'Stress',
     description:
