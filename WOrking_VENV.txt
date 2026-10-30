@@ -1,0 +1,16 @@
+To Create a Virtual Environomnet : 
+    - python3 -m venv venv
+
+To Activate the Venv : 
+    - venv/scripts/activate
+
+To Install FastAPI and Unicorn : 
+    - pip install fastapi unicorn 
+
+To Check The Version of the FastAPI:
+    - python3 -c "import fastapi;print(fastapi.__version__) "
+
+To Run The Unicorn to see the Output : 
+    - uvicorn filename:fastapiVariableName --reload
+    -- Eg : uvicorn main:app -- reload
+
