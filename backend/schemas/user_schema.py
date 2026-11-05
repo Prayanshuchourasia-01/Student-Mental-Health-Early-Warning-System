@@ -8,7 +8,7 @@ class UserRegistration(BaseModel):
         description="Full Name of the Student"
     )
     email:str=Field(
-        min_length=5,max_length=255,description="Student Email Address"
+        min_length=11,max_length=255,description="Student Email Address"
     )
     password:str=Field(
         min_length=8,
