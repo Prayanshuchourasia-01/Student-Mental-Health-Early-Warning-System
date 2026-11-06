@@ -1,20 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os
-from dotenv import load_dotenv
+# import os
+# from dotenv import load_dotenv
 from sqlalchemy import create_engine,text
 from sqlalchemy.exc import SQLAlchemyError
 
-load_dotenv()
+from db.database import database_engine
+from routers.authentication import authentication_router
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise RuntimeError("DatabaseURL is missing , check your backend/.env file") 
 
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-)
+# load_dotenv()
+
+# DATABASE_URL = os.getenv("DATABASE_URL")
+# if not DATABASE_URL:
+#     raise RuntimeError("DatabaseURL is missing , check your backend/.env file") 
+
+# engine = create_engine(
+#     DATABASE_URL,
+#     pool_pre_ping=True,
+# )
 
 
 app = FastAPI(
@@ -24,6 +28,7 @@ app = FastAPI(
     # docs_url = "./docs",
     # redoc_url = "./redoc"
 )
+app.include_router(authentication_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -54,7 +59,7 @@ def health_check():
 @app.get("/api/health/database")
 def database_health_check():
     try:
-        with engine.connect() as connection:
+        with database_engine.connect() as connection:
             connection.execute(text("SELECT 1"))
 
         return {

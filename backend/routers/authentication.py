@@ -1,6 +1,6 @@
-from fastapi import APIRouter,Depends,HTTPException,status
-from sqlalchemy.orm import Session
-from sqlalchemy.exe import IntegrityError
+from fastapi import APIRouter,Depends,HTTPException,status # type: ignore
+from sqlalchemy.orm import Session # type: ignore
+from sqlalchemy.exc import IntegrityError # type: ignore
 
 from db.database import get_database_session
 from models.user import User
@@ -10,7 +10,7 @@ from core.security import hash_password
 
 authentication_router = APIRouter(
     prefix="/api/auth",
-    tagss=["/Authentication"]   
+    tags=["Authentication"]   
 )
 
 @authentication_router.post(
