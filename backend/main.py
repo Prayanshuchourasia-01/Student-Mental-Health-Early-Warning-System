@@ -1,9 +1,9 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI #type:ignore
+from fastapi.middleware.cors import CORSMiddleware #type:ignore
 # import os
 # from dotenv import load_dotenv
-from sqlalchemy import create_engine,text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import create_engine,text #type:ignore
+from sqlalchemy.exc import SQLAlchemyError #type:ignore
 
 from db.database import database_engine
 from routers.authentication import authentication_router
@@ -340,7 +340,7 @@ def get_assessment(assessment_id: int):
     assessment = ASSESSMENTS.get(assessment_id)
 
     if assessment is None:
-        raise HTTPException(
+        raise HTTPException( #type:ignore
             status_code=404,
             detail="Assessment not found"
         )
